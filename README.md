@@ -1,50 +1,33 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(___TODO__: your project name_)
-
-# Shoppy Shoperson 
+# Toxxxme
 
 ## Overview
 
-(___TODO__: a brief one or two paragraph, high-level description of your project_)
+Toxxxme is a simple but powerful website that shows people their exposure to environmental toxicity by having them type in their address.
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+Using the Google Maps API and publically available data sources, a user will be taken on a virtual tour of his/her exposure to toxicity supplemented with locational data and other information.
 
 
 ## Data Model
 
-(___TODO__: a description of your application's data and their relationships to each other_) 
+The application will have a SQL database which is a clone of data data from the Federal environmental database (TOXMAP). Two tables will be linked by reference (by facility serial #) The first table will include every facility on record, it's location and other metadata about it. The second table will list all toxic releases by each facility, where each entry is a toxic release.
 
-The application will store Users, Lists and Items
 
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
-
-(___TODO__: sample documents_)
-
-An Example User:
+Table 1:
 
 ```javascript
 {
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
-}
+	('00602BXTRF111CO',110002085207,'BAXTER HEALTHCARE CORP, FENWAL DIV','111 COLON ST','AGUADA','PR','00602',72003,'AGUADA','18.379830','-67.184530'),
+	('00602BXTRHRD115',110007807258,'DADE DIAGNOSTICS OF PR INC','RD 115 KM 226','AGUADA','PR','00602',72003,'AGUADA','18.380797','-67.191301')
+  }
+
 ```
 
-An Example List with Embedded Items:
+Table 2:
 
 ```javascript
 {
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
+	('98421SLRFN3001M',1394080394392,'Ethylbenzene','100-41-4','1994','4290.00000000000000000','',NULL,NULL,NULL,NULL),
+	('98421SLRFN3001M',1394080394378,'Toluene','108-88-3','1994','22097.00000000000000000','',NULL,NULL,NULL,NULL)
 }
 ```
 

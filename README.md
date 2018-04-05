@@ -75,6 +75,11 @@ About
 
 ## [Link to Initial Main Project File](./documentation/server.js) 
 ## [Link to package.json](./documentation/package.json) 
+# Views
+## [Link to index.ejs](./documentation/index.ejs) 
+## [Link to form.ejs](./documentation/form.ejs) 
+
+
 
 ## Annotations / References Used
 

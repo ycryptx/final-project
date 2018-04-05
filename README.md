@@ -78,7 +78,7 @@ About
 14 points total out of 8 required points 
 
 
-## [Link to Initial Main Project File](server.js) 
+## [Link to Initial Main Project File](./documentation/server.js) 
 
 (___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
 

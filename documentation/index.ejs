@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<title>toxxx</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="netflag_simulation/stylesheet.css"> -->
+<link rel="stylesheet" type="text/css" href="./stylesheet.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+/*https://nuclear-energy.net/media/accidentes_nucleares/chernobyl_estado_actual_4.jpg*/
+/*https://media.wsimag.com/attachments/6839f17b8b5b4dbbe9ee387fa76f96447454f3db/store/fill/1230/692/68db53894973af7ff995dd80b1a39d5320639ea1572f52597cc4884b74bd/The-tragedy-of-Chernobyl.jpg*/
+    background-image: url("./chernobyl.jpg");
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+</style>
+<body>
+<script type="text/javascript" src="./pace.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-xlarge">
+    <a href=/about>About</a>
+  </div>
+  <div class="w3-display-topmiddle">
+    <a href="/"><h1 class="w3-jumbo w3-animate-top">toxxx me</h1></a>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center"></p>
+  </div>
+  <div class="w3-display-middle">
+    <div class="w3-animate-bottom">
+      <% include partials/form %>
+    </div>
+  </div>
+  <% if(errors) { %>
+    <% errors.forEach(function(error) { %>
+      <h1><%= error.msg %></h1>
+    <% }) %>
+  <% } %>
+  <div class="w3-display-bottomleft w3-padding-large">
+    Powered by <a href="Yonatan Medina" target="_blank">Yonatan Medina</a>
+  </div>
+</div>
+</body>
+</html>

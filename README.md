@@ -38,19 +38,13 @@ Table 2:
 
 ## Wireframes
 
-(___TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc._)
+/ - page with form for inputting an address (home)
 
-/list/create - page for creating a new shopping list
+![list create](documentation/home.png)
 
-![list create](documentation/list-create.png)
+/myPlace - page for showing all shopping lists
 
-/list - page for showing all shopping lists
-
-![list](documentation/list.png)
-
-/list/slug - page for showing specific shopping list
-
-![list](documentation/list-slug.png)
+![list](documentation/myLocation.png)
 
 ## Site map
 
@@ -79,8 +73,7 @@ About
 
 
 ## [Link to Initial Main Project File](./documentation/server.js) 
-
-(___TODO__: create a skeleton Express application with a package.json, app.js, views folder, etc. ... and link to your initial app.js_)
+## [Link to package.json](./documentation/package.json) 
 
 ## Annotations / References Used
 

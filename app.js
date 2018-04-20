@@ -7,19 +7,16 @@ var logger = require('morgan');
 var expressValidator = require('express-validator');
 require('dotenv').config();
 
-// var connection = require('./db/schema.js').connection;
-// enter schemaas here
 
 var indexRouter = require('./routes/index');
-var reportRouter = require('./routes/report');
-var aboutRouter = require('./routes/about');
+var reportRouter = require('./routes/report.js');
+var aboutRouter = require('./routes/about.js');
 
 var app = express();
 
 // view engine setup
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
-// hbs.registerPartials(__dirname + './views/partials');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -50,9 +47,3 @@ app.use(function(req, res, next) {
 });
 
 module.exports = app;
-
-// module.exports = {
-//   'app': app,
-//   'connection': connection,
-//   'googleMapsClient' : googleMapsClient
-// };

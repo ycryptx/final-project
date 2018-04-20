@@ -34,7 +34,8 @@ router.post('/address/add', (req, res) => {
 
     				const query = connection.query('CALL geodist(?,?,?)', [lat, lon, 5],
     				function (error, results, fields) {
-              if (error) throw error;
+              if (error) {console.log(error); return};
+              console.log('querying distance!');
     					const matched = results[0];
     					//all locations with facilities in a 5 mile radius
     					//[[facn, fname, lat, lon, distance, [chemical, year, totalreleaselbs]]]
@@ -52,6 +53,7 @@ router.post('/address/add', (req, res) => {
                 });
 
     					};
+              connection.close();
     				});
     		  }
     			else {
@@ -60,6 +62,18 @@ router.post('/address/add', (req, res) => {
     		});
     	}
 })
+
+router.get('/about', function(req, res, next) {
+  console.log('retrieving about page');
+  const description = 'This is a site by Yonatan Medina<br> My effort is to reveal the amount of contamination we\'re living in <br><br> Stay clean xx';
+  res.render('about', {title: 'about', about: description });
+});
+
+router.get('/report', function(req, res, next) {
+  console.log('retrieving report!');
+  res.render('report', { title: 'report' , source: 'reportclient.js'});
+});
+
 
 
 module.exports = router;

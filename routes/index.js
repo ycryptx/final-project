@@ -53,7 +53,7 @@ router.post('/address/add', (req, res) => {
                 });
 
     					};
-              connection.close();
+              connection.release();
     				});
     		  }
     			else {
@@ -72,6 +72,11 @@ router.get('/about', function(req, res, next) {
 router.get('/report', function(req, res, next) {
   console.log('retrieving report!');
   res.render('report', { title: 'report' , source: 'reportclient.js'});
+});
+
+router.post('/create/report', function(req, res, next) {
+  connection.query('INSERT INTO facilities (facn, fname, address) VALUES (?, ?, ?)', ['user', req.body.chemical, req.body.address]);
+  console.log('Submitted new contamination report!');
 });
 
 

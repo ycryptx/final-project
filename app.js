@@ -10,7 +10,6 @@ require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var reportRouter = require('./routes/report.js');
-var aboutRouter = require('./routes/about.js');
 
 var app = express();
 
@@ -27,7 +26,6 @@ app.use(expressValidator())
 
 app.use('/', indexRouter);
 app.use('/report', reportRouter);
-app.use('/about', aboutRouter);
 
 // error handler
 app.use(function(err, req, res, next) {

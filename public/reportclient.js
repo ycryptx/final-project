@@ -14,7 +14,7 @@ function submit() {
   let amount = document.getElementById('amount').value;
 
   const req = new XMLHttpRequest();
-  req.open('POST', '/create/report', true);
+  req.open('POST', '/report/submit', true);
   req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   req.addEventListener('load', function() {
     if (req.status >= 200 && req.status < 400){

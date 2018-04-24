@@ -7,7 +7,7 @@ router.get('/report', function(req, res, next) {
   res.render('report', { title: 'report' , source: 'reportclient.js'});
 });
 
-router.post('/report/new', function(req, res, next) {
+router.post('/report/submit', function(req, res, next) {
   connection.query('INSERT INTO facilities (facn, fname, address) VALUES (?, ?, ?)', ['user', req.body.chemical, req.body.address]);
   connection.close();
   console.log('Submitted new contamination report!');

@@ -32,7 +32,7 @@ Table 2:
 ```
 
 
-## [Link to Commented First Draft Schema](./documentation/schema.js) 
+## [Link to Commented First Draft Schema](./documentation/schema.js)
 
 (___TODO__: create a first draft of your Schemas in db.js and link to it_)
 
@@ -70,14 +70,14 @@ About
 * (5 points) vue.js
     * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
 
-14 points total out of 8 required points 
+14 points total out of 8 required points
 
 
-## [Link to Initial Main Project File](./documentation/server.js) 
-## [Link to package.json](./documentation/package.json) 
+## [Link to Initial Main Project File](./documentation/server.js)
+## [Link to package.json](./documentation/package.json)
 # Views
-## [Link to index.ejs](./documentation/index.ejs) 
-## [Link to form.ejs](./documentation/form.ejs) 
+## [Link to index.ejs](./documentation/index.ejs)
+## [Link to form.ejs](./documentation/form.ejs)
 
 
 
@@ -85,3 +85,7 @@ About
 
 (___TODO__: list any tutorials/references/etc. that you've based your code off of_)
 
+## resources used
+https://github.com/github/fetch
+https://www.kirupa.com/react/creating_single_page_app_react_using_react_router.htm
+https://tomchentw.github.io/react-google-maps/

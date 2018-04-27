@@ -1,6 +1,5 @@
 var createError = require('http-errors');
 var express = require('express');
-var hbs = require('hbs');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -8,24 +7,30 @@ var expressValidator = require('express-validator');
 require('dotenv').config();
 
 
-var indexRouter = require('./routes/index');
-var reportRouter = require('./routes/report.js');
+var indexRouter = require('./routes/mainRouter');
 
 var app = express();
-
-// view engine setup
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+if(process.env.NODE_ENV === 'development') {
+    // configure webpack-dev-middlware with our original webpack config
+    // then... "use" webpack-dev-middleware
+
+    const webpackDevMiddleware = require("webpack-dev-middleware");
+    const webpackConfig = require('./webpack.config.js')
+    const webpack = require("webpack");
+    const compiler = webpack(webpackConfig);
+    app.use(webpackDevMiddleware(compiler, {
+        publicPath:'/javascripts'
+    }));
+}
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(expressValidator())
 
 app.use('/', indexRouter);
-app.use('/report', reportRouter);
 
 // error handler
 app.use(function(err, req, res, next) {

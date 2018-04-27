@@ -23,14 +23,7 @@ const releases = {facn: String,
                      year: String,
                       amount: String
                      }
-//mySQL middleware
-//CHANGE THIS TO HOSTING ADDRESS
-// var connection = mysql.createConnection({
-//  host     : process.env.SQL_HOST,
-//  user     : process.env.SQL_USER,
-//  password : process.env.SQL_PASSWORD,
-//  database : process.env.SQL_DATABASE
-// });
+
 var connection =  mysql.createConnection({
    host     : process.env.SQL_HOST,
    user     : process.env.SQL_USER,
@@ -50,7 +43,7 @@ function handleDisconnect() {
   connection.connect(function(err) {              // The server is either down
     if(err) {                                     // or restarting (takes a while sometimes).
       console.log('error when connecting to db:', err);
-      setTimeout(handleDisconnect, 1); // We introduce a delay before attempting to reconnect,
+      setTimeout(handleDisconnect, 5); // We introduce a delay before attempting to reconnect,
     }                                     // to avoid a hot loop, and to allow our node script to
   });                                     // process asynchronous requests in the meantime.
                                           // If you're also serving http, display a 503 error.
@@ -66,16 +59,6 @@ function handleDisconnect() {
 
 handleDisconnect();
 
-// connection.connect(function(err) {
-//  if (err) {
-//    console.error('error connecting: ' + err.stack);
-//    return;
-//  }
-//  const arr = [1, 2, 3];
-//  arr.foo = 4;
-//  console.log(arr.foo);
-//  console.log('connected to MYSQL server as id ' + connection.threadId);
-// });
 
 module.exports.connection = connection;
 module.exports.releases = releases;

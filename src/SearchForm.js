@@ -18,7 +18,9 @@ class SearchForm extends Component {
 			readytoMap: false,
 			markers: '',
 			lat: '',
-			lng: ''
+			lng: '',
+			error:'',
+			shouldHide: true
 		}
 		this.handleClick = this.handleClick.bind(this);
 		this.updateInputValue = this.updateInputValue.bind(this);
@@ -26,6 +28,8 @@ class SearchForm extends Component {
 	handleClick(evt) {
 		const parent = this;
 		evt.preventDefault();
+		parent.setState({error:''});
+		parent.setState({shouldHide:true});
 		let input = this.state.userAddress;
 		fetch('/search', {
 		  method: 'POST',
@@ -36,6 +40,7 @@ class SearchForm extends Component {
 		    address: input
 		  })
 		})
+		// .then(printme)
 		.then(checkStatus)
 		.then(parseJSON)
 		.then(function(data) {
@@ -45,8 +50,10 @@ class SearchForm extends Component {
 				parent.setState({lng:data.geo.lng});
 				parent.setState({readytoMap: true});
 
-		}).catch(function(error) {
-			console.log('request failed', error.response)
+		}).catch(function(err) {
+			parent.setState({shouldHide:false});
+			parent.setState({error:err.response});
+			console.log('request failed', err.response);
 		})
 	}
 	updateInputValue(evt) {
@@ -63,6 +70,7 @@ class SearchForm extends Component {
 					        								<input type="submit" value="submit"/>
 					      							</form>)
 			}
+			<div style={this.state.shouldHide ? { display: 'none' } :{}} className='isa_warning'>{this.state.error}</div>
 			</div>
 		);
 	}
@@ -113,7 +121,12 @@ function checkStatus(response) {
     return response
   } else {
     var error = new Error(response.statusText)
-    error.response = response.text()
+		if (response.status === 400) {
+			error.response = 'Address cannot be empty, try again :S';
+		}
+		else {
+			error.response = 'I only read legible, US-based addresses XD';
+		}
     throw error
   }
 }
@@ -121,8 +134,6 @@ function checkStatus(response) {
 function parseJSON(response) {
   return response.json()
 }
-
-
 
 export default SearchForm;
 

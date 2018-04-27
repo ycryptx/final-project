@@ -46,7 +46,7 @@ router.post('/search', (req, res) => {
           }
           else {
             console.log(err);
-            res.status(400).json({error:'I only read legible, US-based addresses XD'});
+            res.status(403).json({error:'I only read legible, US-based addresses XD'});
           }
         });
     }
@@ -71,7 +71,7 @@ router.post('/report', (req, res) => {
         }
         else {
           console.log(err);
-          res.status(400).json({error:'You did not send a proper address :S'});
+          res.status(400).json({error:'You did not provide a proper address :S'});
         }
       });
 });

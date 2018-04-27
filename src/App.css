@@ -4,13 +4,15 @@
 
 .App-logo {
   animation: App-logo-spin infinite 10s linear;
-  height: 150px;
+  height: 200px;
 }
 
 
 .App-title {
-  font-size: 3.5em;
+  font-size: 6em;
   color: white;
+  position:relative;animation:animatetop 0.7s}@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}
+
 }
 
 .App-intro {

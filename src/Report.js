@@ -9,7 +9,10 @@ class Report extends Component {
 			location: '',
 			chemical: '',
 			amount: '',
-			name: ''
+			name: '',
+			error: '',
+			shouldHide: true
+
 		}
 		this.handleClick = this.handleClick.bind(this);
 		this.updateInputValue = this.updateInputValue.bind(this);
@@ -17,6 +20,8 @@ class Report extends Component {
 	handleClick(evt) {
 		const parent = this;
 		evt.preventDefault();
+		parent.setState({error:''});
+		parent.setState({shouldHide:true});
 		let name = this.state.name;
 		let location = this.state.location;
 		let chemical = this.state.chemical;
@@ -37,8 +42,10 @@ class Report extends Component {
 		.then(parseJSON)
 		.then(function(data) {
 				console.log('request succeeded with JSON response', data);
-		}).catch(function(error) {
-			console.log('request failed', error.response)
+		}).catch(function(err) {
+			parent.setState({shouldHide:false});
+			parent.setState({error:err.response});
+			console.log('request failed', err.response)
 		})
 	}
 	updateInputValue(evt) {
@@ -57,6 +64,7 @@ class Report extends Component {
           <p><label for="amount">Amount Released:</label> <input type="text" onChange={this.updateInputValue} value={this.state.amount} name="amount"/></p>
           <p><input type="submit" value="Add"/></p>
         </form>
+				<div style={this.state.shouldHide ? { display: 'none' } :{}} className='isa_warning'>{this.state.error}</div>
       </div>
 		);
 	}
@@ -67,7 +75,7 @@ function checkStatus(response) {
     return response
   } else {
     var error = new Error(response.statusText)
-    error.response = response.text()
+    error.response = 'You did not provide a proper address :S'
     throw error
   }
 }

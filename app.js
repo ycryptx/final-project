@@ -14,20 +14,8 @@ var app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(cookieParser());
-if(process.env.NODE_ENV === 'development') {
-    // configure webpack-dev-middlware with our original webpack config
-    // then... "use" webpack-dev-middleware
-
-    const webpackDevMiddleware = require("webpack-dev-middleware");
-    const webpackConfig = require('./webpack.config.js')
-    const webpack = require("webpack");
-    const compiler = webpack(webpackConfig);
-    app.use(webpackDevMiddleware(compiler, {
-        publicPath:'/javascripts'
-    }));
-}
-app.use(express.static(path.join(__dirname, 'build')));
 app.use(expressValidator())
 
 app.use('/', indexRouter);

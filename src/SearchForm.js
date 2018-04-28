@@ -6,7 +6,7 @@ const {
   withGoogleMap,
   GoogleMap,
   Marker,
-	FusionTablesLayer,
+	// FusionTablesLayer,
 } = require("react-google-maps");
 const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 

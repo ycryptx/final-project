@@ -25,11 +25,9 @@ class App extends Component {
         <div className="App">
             <a href='/'><img src={logo} className="App-logo" alt="logo" /></a>
             <h1 className="App-title">toxxx me ;)</h1>
-              <ul>
-                <li><NavLink to='/'>home</NavLink></li>
-                <li><NavLink to='/about'>about</NavLink></li>
-                <li><NavLink to='/report'>report</NavLink></li>
-              </ul>
+                <div><NavLink to='/'>home</NavLink></div>
+                <div><NavLink to='/about'>about</NavLink></div>
+                <div><NavLink to='/report'>report</NavLink></div>
               <Route exact path="/" component={SearchForm}/>
               <Route path="/about" component={About}/>
               <Route path="/report" component={Report}/>

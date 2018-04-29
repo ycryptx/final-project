@@ -1,18 +1,14 @@
 var express = require('express');
 var router = express.Router();
-const mysql = require('mysql2');
+var mysql = require('../db/schema.js').mysql;
+var configs = require('../db/schema.js').configs;
 var handleServer = require('../db/schema.js').handleDisconnect;
 var googleMapsClient = require('@google/maps').createClient({
   key: process.env.GOOGLE_KEY
 });
 var connection;
 function handleDisconnect() {
-   connection = mysql.createConnection({
-   host     : process.env.SQL_HOST,
-   user     : process.env.SQL_USER,
-   password : process.env.SQL_PASSWORD,
-   database : process.env.SQL_DATABASE
-  }); // Recreate the connection, since
+   connection = mysql.createConnection(configs); // Recreate the connection, since
                                                   // the old one cannot be reused.
 
   connection.connect(function(err) {              // The server is either down
@@ -29,15 +25,13 @@ function handleDisconnect() {
   });
 }
 
-handleDisconnect();
-
 router.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 
 router.post('/search', (req, res) => {
-  // handleServer();
+  handleDisconnect();
   console.log('Form submitted');
   //read form data
 	req.checkBody('address','Address is Required').notEmpty();
@@ -45,7 +39,7 @@ router.post('/search', (req, res) => {
 
 	if(errors) {
 		console.log(errors);
-    // connection.close();
+    connection.close();
     res.status(400).json({error:'Address cannot be empty, try again :S'});
 	} else {
 		console.log('SUCCESS');
@@ -66,13 +60,13 @@ router.post('/search', (req, res) => {
               if (error) {console.log('error on geodist!\n\n',error); return};
               console.log('querying distance!');
               const matched = results[0];
-              // connection.close();
+              connection.close();
               res.status(200).json({data:matched, geo:response.json.results[0]['geometry']['location']});
             });
           }
           else {
             console.log(err);
-            // connection.close();
+            connection.close();
             res.status(403).json({error:'I only read legible, US-based addresses XD'});
           }
         });
@@ -81,7 +75,7 @@ router.post('/search', (req, res) => {
 
 
 router.post('/report', (req, res) => {
-  // handleServer();
+  handleDisconnect();
   console.log('report submitted... lets see if it works');
   googleMapsClient.geocode({
         address: req.body.location
@@ -95,12 +89,12 @@ router.post('/report', (req, res) => {
           sql = mysql.format(sql, inserts);
           connection.query(sql);
           console.log('Submitted new contamination report!');
-          // connection.close();
+          connection.close();
           res.status(200).send('');
         }
         else {
           console.log(err);
-          // connection.close();
+          connection.close();
           res.status(400).json({error:'You did not provide a proper address :S'});
         }
       });

@@ -26,6 +26,7 @@ function handleDisconnect() {
 }
 
 router.get('*', (req, res) => {
+  console.log('home page is about to load!');
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
